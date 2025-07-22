@@ -36,7 +36,7 @@ def browser(request):
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")
         options = FirefoxOptions()
-        options.set_preference("int.accept_languages", user_language)
+        options.set_preference("intl.accept_languages", user_language)
         browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=options)
         
     else:
