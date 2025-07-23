@@ -3,6 +3,7 @@
 
 from .base_page import BasePage  # Импортируем базовый класс из того же пакета
 from .locators import MainPageLocators
+from .login_page import LoginPage
 from selenium.webdriver.common.by import By  # Импортируем способ поиска элементов
 
 class MainPage(BasePage):  # Наследуемся от BasePage для использования его методов
@@ -13,10 +14,12 @@ class MainPage(BasePage):  # Наследуемся от BasePage для исп�
 
 
     def go_to_login_page(self):  # Метод для перехода на страницу логина
-        # Находим элемент с селектором #login_link (обычно ссылка для входа)
-        # login_link = self.browser.find_element(By.CSS_SELECTOR, "#login_link")
-        # login_link = self.browser.find_element(By.ID, "registration_link")
-        login_link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
-        # Кликаем по ссылке для перехода на страницу логина
-        login_link.click()
-
+        # # Находим элемент с селектором #login_link (обычно ссылка для входа)
+        # # login_link = self.browser.find_element(By.CSS_SELECTOR, "#login_link")
+        # # login_link = self.browser.find_element(By.ID, "registration_link")
+        # login_link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
+        # # Кликаем по ссылке для перехода на страницу логина
+        # login_link.click()
+        link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
+        link.click()
+        # return LoginPage(browser=self.browser, url=self.browser.current_url) 
