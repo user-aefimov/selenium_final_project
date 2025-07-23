@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By  # Способ поиска эле�
 from selenium.webdriver.support.ui import WebDriverWait  # Инструмент для ожидания загрузки элементов
 from selenium.webdriver.support import expected_conditions as EC  # Условия ожидания (например, видимость элемента)
 from .pages.main_page import MainPage  # Импортируем класс MainPage из пакета pages
+from .pages.login_page import LoginPage  # Импортируем класс LoginPage из пакета pages
 
 
 # Определяем тест, проверяющий переход на страницу логина
@@ -29,3 +30,9 @@ def test_guest_should_see_login_link(browser):
     page = MainPage(browser, link)
     page.open()
     page.should_be_login_link()
+
+
+def test_login_page(browser):
+    page = LoginPage(browser, url="http://selenium1py.pythonanywhere.com/accounts/login/")
+    page.open()
+    page.should_be_login_page()
