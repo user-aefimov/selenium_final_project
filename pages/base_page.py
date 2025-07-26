@@ -1,9 +1,11 @@
 # pages/base_page.py
 # Базовый класс для Page Object, содержащий общие методы
 import math
-import re
+# import re
 from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException, TimeoutException
-import time
+# import time
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class BasePage():
     def __init__(self, browser, url, timeout=10):  # Конструктор класса, принимающий браузер и URL
@@ -57,19 +59,44 @@ class BasePage():
     #         print(f"Error solving quiz: {str(e)}")
     #         raise
 
+    # def clear_basket(driver):
+    #     driver.get("https://example.com/basket")
+    #     while True:
+    #         try:
+    #             remove_btn = WebDriverWait(driver, 2).until(
+    #                 EC.element_to_be_clickable((By.CSS_SELECTOR, ".remove-item"))
+    #             )
+    #             remove_btn.click()
+    #             WebDriverWait(driver, 2).until(EC.staleness_of(remove_btn))
+    #         except TimeoutException:
+    #             break
+
+
     def solve_quiz_and_get_code(self):
-        alert = self.browser.switch_to.alert
-        x = alert.text.split(" ")[2]
-        answer = str(math.log(abs((12 * math.sin(float(x))))))
-        alert.send_keys(answer)
-        alert.accept()
         try:
             alert = self.browser.switch_to.alert
-            alert_text = alert.text
-            print(f"Your code: {alert_text}")
+            x = alert.text.split(" ")[2]
+            answer = str(math.log(abs((12 * math.sin(float(x))))))
+            alert.send_keys(answer)
             alert.accept()
-        except NoAlertPresentException:
-            print("No second alert presented")
+                # Попытка обработки алерта, если он появится (старое поведение)
+            try:
+                # Добавьте ожидание второго алерта (5 секунд)
+                WebDriverWait(self.browser, 5).until(EC.alert_is_present())
+                alert = self.browser.switch_to.alert
+                code_text = alert.text
+                print(f"Your code: {code_text}")
+                alert.accept()
+                print("Обработан промо-алерт (старое поведение)")
+                # return code_text  # Возвращаем текст алерта
+            except (TimeoutException, NoAlertPresentException):
+                print("Промо-алерт не появился (новое поведение)")
+                print("No second alert presented")
+                # return None
+        except Exception as e:
+            print(f"Error solving quiz: {str(e)}")
+            raise    
+
 
     def is_element_present(self, how, what):
         self.what = what

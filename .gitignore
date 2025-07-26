@@ -3,7 +3,7 @@ test_items_.py
 test_items.py
 base_page.txt
 main_page.txt
-
+draft.py
 
 # Virtual environment
 .venv/
