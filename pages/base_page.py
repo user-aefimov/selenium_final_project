@@ -6,70 +6,27 @@ from selenium.common.exceptions import NoSuchElementException, NoAlertPresentExc
 # import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from .locators import BasePageLocators
+
 
 class BasePage():
     def __init__(self, browser, url, timeout=10):  # Конструктор класса, принимающий браузер и URL
         self.browser = browser  # Сохраняем экземпляр браузера для дальнейшего использования
         self.url = url  # Сохраняем URL страницы
         self.browser.implicitly_wait(timeout)
+    
+    def go_to_login_page(self):
+        link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+        link.click()
+        # alert = self.browser.switch_to.alert
+        # alert.accept()
 
+
+    def should_be_login_link(self):
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), f"ERROR {self.what} is not presented"
         
     def open(self):  # Метод для открытия страницы по сохраненному URL
         self.browser.get(self.url)  # Используем метод get() браузера для загрузки страницы
-
-
-    # def solve_quiz_and_get_code(self):
-    #     try:
-    #         alert = self.browser.switch_to.alert
-    #         alert_text = alert.text
-    #         print(f"Alert text: {alert_text}")
-
-    #         # Извлекаем число после "x ="
-    #         match = re.search(r'x\s*=\s*(\d+)', alert_text)
-    #         if match:
-    #             x = match.group(1)
-    #             print(f"Found x = {x}")
-    #         # Вычисляем ответ: log10(|12*sin(x)|)
-    #             x_rad = math.radians(float(x))
-    #             result = math.log10(abs(12 * math.sin(float(x_rad))))
-    #             answer = str(round(result, 3))
-    #             print(f"Calculated answer: {answer}")
-        
-    #             # Ввод ответа и подтверждение
-    #             alert.send_keys(answer)
-    #             time.sleep(3)
-    #             alert.accept()
-    #             time.sleep(3)
-            
-    #             # Обработка второго алерта
-    #             try:
-    #                 alert = self.browser.switch_to.alert
-    #                 code_text = alert.text
-    #                 print(f"Your code: {code_text}")
-    #                 alert.accept()
-    #                 return code_text
-    #             except NoAlertPresentException:
-    #                 print("No second alert presented") 
-    #                 return None
-    #         else:
-    #             print("Couldn't find x value in alert")
-    #             return None
-                
-    #     except Exception as e:
-    #         print(f"Error solving quiz: {str(e)}")
-    #         raise
-
-    # def clear_basket(driver):
-    #     driver.get("https://example.com/basket")
-    #     while True:
-    #         try:
-    #             remove_btn = WebDriverWait(driver, 2).until(
-    #                 EC.element_to_be_clickable((By.CSS_SELECTOR, ".remove-item"))
-    #             )
-    #             remove_btn.click()
-    #             WebDriverWait(driver, 2).until(EC.staleness_of(remove_btn))
-    #         except TimeoutException:
-    #             break
 
 
     def solve_quiz_and_get_code(self):
@@ -128,3 +85,59 @@ class BasePage():
         except TimeoutException:
             return False
         return True
+    
+
+
+
+    # def solve_quiz_and_get_code(self):
+    #     try:
+    #         alert = self.browser.switch_to.alert
+    #         alert_text = alert.text
+    #         print(f"Alert text: {alert_text}")
+
+    #         # Извлекаем число после "x ="
+    #         match = re.search(r'x\s*=\s*(\d+)', alert_text)
+    #         if match:
+    #             x = match.group(1)
+    #             print(f"Found x = {x}")
+    #         # Вычисляем ответ: log10(|12*sin(x)|)
+    #             x_rad = math.radians(float(x))
+    #             result = math.log10(abs(12 * math.sin(float(x_rad))))
+    #             answer = str(round(result, 3))
+    #             print(f"Calculated answer: {answer}")
+        
+    #             # Ввод ответа и подтверждение
+    #             alert.send_keys(answer)
+    #             time.sleep(3)
+    #             alert.accept()
+    #             time.sleep(3)
+            
+    #             # Обработка второго алерта
+    #             try:
+    #                 alert = self.browser.switch_to.alert
+    #                 code_text = alert.text
+    #                 print(f"Your code: {code_text}")
+    #                 alert.accept()
+    #                 return code_text
+    #             except NoAlertPresentException:
+    #                 print("No second alert presented") 
+    #                 return None
+    #         else:
+    #             print("Couldn't find x value in alert")
+    #             return None
+                
+    #     except Exception as e:
+    #         print(f"Error solving quiz: {str(e)}")
+    #         raise
+
+    # def clear_basket(driver):
+    #     driver.get("https://example.com/basket")
+    #     while True:
+    #         try:
+    #             remove_btn = WebDriverWait(driver, 2).until(
+    #                 EC.element_to_be_clickable((By.CSS_SELECTOR, ".remove-item"))
+    #             )
+    #             remove_btn.click()
+    #             WebDriverWait(driver, 2).until(EC.staleness_of(remove_btn))
+    #         except TimeoutException:
+    #             break
