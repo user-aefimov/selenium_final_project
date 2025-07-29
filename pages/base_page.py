@@ -21,7 +21,6 @@ class BasePage():
         # alert = self.browser.switch_to.alert
         # alert.accept()
 
-
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), f"ERROR {self.what} is not presented"
         
@@ -86,6 +85,16 @@ class BasePage():
             return False
         return True
     
+    def go_to_basket_page(self):
+        basket_link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
+        basket_link.click()
+
+
+
+
+
+
+
 
 
 
