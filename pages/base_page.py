@@ -86,9 +86,11 @@ class BasePage():
         return True
     
     def go_to_basket_page(self):
+        from .basket_page import BasketPage
         basket_link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
         basket_link.click()
-
+        # Возвращаем объект страницы корзины
+        return BasketPage(self.browser, self.browser.current_url)
 
 
 

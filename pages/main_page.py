@@ -9,6 +9,25 @@ from selenium.webdriver.common.by import By  # Импортируем спосо
 class MainPage(BasePage):  # Наследуемся от BasePage для использования его методов
     def __init__(self, *args, **kwargs):
         super(MainPage, self).__init__(*args, **kwargs)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     # def should_be_login_link(self):
     #     # assert self.is_element_present(By.CSS_SELECTOR, "#login_link_invalid"), f"ERROR {self.what} is not presented"
     #     # assert self.is_element_present(By.ID, "registration_link"), f"ERROR {self.what} is not presented"
