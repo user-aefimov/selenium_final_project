@@ -11,29 +11,31 @@ from .pages.main_page import MainPage  # Импортируем класс MainP
 from .pages.login_page import LoginPage  # Импортируем класс LoginPage из пакета pages
 from .pages.basket_page import BasketPage
 
-# Определяем тест, проверяющий переход на страницу логина
-def test_guest_can_go_to_login_page(browser):  # 'browser' — фикстура из conftest.py, предоставляющая экземпляр браузера
-    # Указываем URL тестируемой страницы
-    # link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
-    link = "http://selenium1py.pythonanywhere.com/"
-    # Создаем экземпляр класса MainPage, передавая браузер и URL
-    # MainPage — это Page Object, который инкапсулирует логику работы с главной страницей
-    page = MainPage(browser, link)
-    # Открываем страницу, используя метод open() из BasePage
-    page.open()
-    # Выполняем переход на страницу логина, используя метод go_to_login_page()
-    # login_page = page.go_to_login_page()
-    # login_page.should_be_login_page()
-    page.go_to_login_page()
-    login_page = LoginPage(browser, browser.current_url)
-    login_page.should_be_login_page()
+@pytest.mark.login_guest
+class TestLoginFromMainPage():
+    # Определяем тест, проверяющий переход на страницу логина
+    def test_guest_can_go_to_login_page(self, browser):  # 'browser' — фикстура из conftest.py, предоставляющая экземпляр браузера
+        # Указываем URL тестируемой страницы
+        # link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
+        link = "http://selenium1py.pythonanywhere.com/"
+        # Создаем экземпляр класса MainPage, передавая браузер и URL
+        # MainPage — это Page Object, который инкапсулирует логику работы с главной страницей
+        page = MainPage(browser, link)
+        # Открываем страницу, используя метод open() из BasePage
+        page.open()
+        # Выполняем переход на страницу логина, используя метод go_to_login_page()
+        # login_page = page.go_to_login_page()
+        # login_page.should_be_login_page()
+        page.go_to_login_page()
+        login_page = LoginPage(browser, browser.current_url)
+        login_page.should_be_login_page()
 
-def test_guest_should_see_login_link(browser):
-    # link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
-    link = "http://selenium1py.pythonanywhere.com/"
-    page = MainPage(browser, link)
-    page.open()
-    page.should_be_login_link()
+    def test_guest_should_see_login_link(self, browser):
+        # link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209?promo=midsummer"
+        link = "http://selenium1py.pythonanywhere.com/"
+        page = MainPage(browser, link)
+        page.open()
+        page.should_be_login_link()
 
 
 @pytest.mark.basket 

@@ -85,3 +85,50 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     # 4. Ожидаем, что есть текст о том что корзина пуста
     basket_page.should_be_empty_basket()
 
+
+@pytest.mark.user
+class TestUserAddToBasketFromProductPage():
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        # 1. Открыть страницу регистрации
+        link = "http://selenium1py.pythonanywhere.com/accounts/login/"
+        login_page = LoginPage(browser, link)
+        login_page.open()
+        # 2. Зарегистрировать нового пользователя
+        email = str(time.time()) + '@fakemail.org'
+        password = str(time.time())
+        login_page.register_new_user(email, password)
+        # 3. Проверить, что пользователь залогинен
+        login_page.should_be_authorized_user
+
+    def test_user_cant_see_success_message(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
+
+#     offer_ids = [
+#     pytest.param(f"offer{i}", marks=pytest.mark.xfail) if i == 7 else f"offer{i}"
+#     for i in range(0, 10)
+# ]
+#     @pytest.mark.parametrize('offer_id', offer_ids)
+#     def test_user_can_add_product_to_basket(self, browser, offer_id):
+#         link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo={offer_id}"
+    
+    def test_user_can_add_product_to_basket(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
+        # общая часть теста
+        page = ProductPage(browser, link)
+        page.open()
+        # Запоминаем данные продукта Проверяем название и цену перед добавлением
+        product_name = page.get_product_name()
+        product_price = page.get_product_price()
+        print(f"Testing product: {product_name} ({product_price})")
+        # Добавляем в корзину и решаем задачу
+        page.add_to_basket()
+        page.solve_quiz_and_get_code()
+        # Добавляем задержку для появления сообщений
+        time.sleep(1)
+        # Проверяем сообщения
+        page.should_be_success_message(product_name)
+        page.should_be_basket_total(product_price)

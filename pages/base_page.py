@@ -91,6 +91,11 @@ class BasePage():
         basket_link.click()
         # Возвращаем объект страницы корзины
         return BasketPage(self.browser, self.browser.current_url)
+    
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), \
+        "User icon is not presented, probably unauthorised user"
+
 
 
 
