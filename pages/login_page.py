@@ -1,3 +1,5 @@
+# Класс для работы со страницей логина, наследуется от BasePage
+
 from .base_page import BasePage
 from .locators import LoginPageLocators
 
