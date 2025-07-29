@@ -7,9 +7,9 @@ import pytest
 from selenium.webdriver.common.by import By  # Способ поиска элементов на странице (например, по ID или CSS)
 from selenium.webdriver.support.ui import WebDriverWait  # Инструмент для ожидания загрузки элементов
 from selenium.webdriver.support import expected_conditions as EC  # Условия ожидания (например, видимость элемента)
-from .pages.main_page import MainPage  # Импортируем класс MainPage из пакета pages
-from .pages.login_page import LoginPage  # Импортируем класс LoginPage из пакета pages
-from .pages.basket_page import BasketPage
+from pages.main_page import MainPage  # Импортируем класс MainPage из пакета pages
+from pages.login_page import LoginPage  # Импортируем класс LoginPage из пакета pages
+from pages.basket_page import BasketPage
 
 @pytest.mark.login_guest
 class TestLoginFromMainPage():

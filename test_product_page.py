@@ -1,7 +1,7 @@
 import pytest
 import time
-from .pages.product_page import ProductPage
-from .pages.login_page import LoginPage
+from pages.product_page import ProductPage
+from pages.login_page import LoginPage
 
 # @pytest.mark.parametrize('product_link', [
 #     "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear",
