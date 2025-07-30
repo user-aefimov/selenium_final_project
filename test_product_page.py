@@ -6,6 +6,10 @@ import pytest
 import time
 from pages.product_page import ProductPage
 from pages.login_page import LoginPage
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 # @pytest.mark.parametrize('product_link', [
 #     "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear",
@@ -116,7 +120,6 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
 
 
 
-
 @pytest.mark.user
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope="function", autouse=True)
@@ -129,7 +132,9 @@ class TestUserAddToBasketFromProductPage():
         email = str(time.time()) + '@fakemail.org'
         password = str(time.time())
         login_page.register_new_user(email, password)
-        # 3. Проверить, что пользователь залогинен
+        # 3. ожидание после регистрации
+        login_page.wait_for_authorization()  
+        # 4. Проверить, что пользователь залогинен
         login_page.should_be_authorized_user()
 
     def test_user_cant_see_success_message(self, browser):

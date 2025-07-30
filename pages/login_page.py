@@ -38,9 +38,20 @@ class LoginPage(BasePage):
         email_field = self.browser.find_element(*LoginPageLocators.REGISTER_EMAIL)
         email_field.send_keys(email)
 
-        password_field = self.browser.find_element(*LoginPageLocators.CONFIRM_PASSWORD)
-        password_field.send_keys(password)
+        # password_field = self.browser.find_element(*LoginPageLocators.CONFIRM_PASSWORD)
+        # password_field.send_keys(password)
+
+        password_field1 = self.browser.find_element(*LoginPageLocators.REGISTER_PASSWORD)
+        password_field1.send_keys(password)
+        
+        password_field2 = self.browser.find_element(*LoginPageLocators.CONFIRM_PASSWORD)
+        password_field2.send_keys(password)
 
         # Нажимаем кнопку регистрации
         register_button = self.browser.find_element(*LoginPageLocators.REGISTER_BUTTON)
         register_button.click()
+
+    def should_be_registered(self):
+        assert self.is_element_present(
+            *LoginPageLocators.REGISTRATION_SUCCESS
+        ), "Registration failed"
