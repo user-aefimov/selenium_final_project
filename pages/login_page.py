@@ -1,3 +1,8 @@
+# login_page.py
+# Copyright (c) 2025 Aleksey Efimov
+# MIT License
+
+
 # Класс для работы со страницей логина, наследуется от BasePage
 
 from .base_page import BasePage

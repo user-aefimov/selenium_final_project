@@ -1,3 +1,8 @@
+# busket_page.py
+# Copyright (c) 2025 Aleksey Efimov
+# MIT License
+
+
 from .base_page import BasePage
 from .locators import BasketPageLocators
 

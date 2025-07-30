@@ -1,3 +1,7 @@
+# locators.py
+# Copyright (c) 2025 Aleksey Efimov
+# MIT License
+
 from selenium.webdriver.common.by import By
 
 

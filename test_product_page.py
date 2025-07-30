@@ -1,3 +1,7 @@
+# test_product_page.py
+# Copyright (c) 2025 Aleksey Efimov
+# MIT License
+
 import pytest
 import time
 from pages.product_page import ProductPage

@@ -1,3 +1,8 @@
+# product_page.py
+# Copyright (c) 2025 Aleksey Efimov
+# MIT License
+
+
 from selenium.common.exceptions import TimeoutException, NoAlertPresentException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC

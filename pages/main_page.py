@@ -1,3 +1,7 @@
+# main_page.py
+# Copyright (c) 2025 Aleksey Efimov
+# MIT License
+
 # pages/main_page.py
 # Класс для работы с главной страницей, наследуется от BasePage
 

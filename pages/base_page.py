@@ -1,3 +1,9 @@
+# base_page.py
+# Copyright (c) 2025 Aleksey Efimov
+# MIT License
+
+
+
 # pages/base_page.py
 # Базовый класс для Page Object, содержащий общие методы
 import math
