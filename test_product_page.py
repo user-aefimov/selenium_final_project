@@ -6,9 +6,7 @@ import pytest
 import time
 from pages.product_page import ProductPage
 from pages.login_page import LoginPage
-import logging
 
-logger = logging.getLogger(__name__)
 
 
 # @pytest.mark.parametrize('product_link', [

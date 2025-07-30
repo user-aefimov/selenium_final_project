@@ -10,6 +10,22 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions  # Нас
 from selenium.webdriver.firefox.options import Options as FirefoxOptions  # Настройки для Firefox
 from webdriver_manager.chrome import ChromeDriverManager  # Менеджер для ChromeDriver
 from webdriver_manager.firefox import GeckoDriverManager  # Менеджер для GeckoDriver
+import logging
+
+
+def pytest_configure(config):
+    # Базовый уровень логирования
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S'
+    )
+    # logging.INFO - только основные действия
+    # logging.DEBUG - детальная информация
+    # logging.WARNING - только предупреждения и ошибки
+    
+    # Для конкретных модулей можно установить разный уровень
+    logging.getLogger('login_page').setLevel(logging.DEBUG)
 
 # Функция для добавления пользовательских опций при запуске pytest
 def pytest_addoption(parser):
